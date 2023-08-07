@@ -27,31 +27,46 @@ document.addEventListener('DOMContentLoaded', function(e) {
   }
 });
 </script>
+<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
+// v0.0.1
+// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeList = document.getElementsByClassName("sourceCode");
+  for (var i = 0; i < codeList.length; i++) {
+    var linkList = codeList[i].getElementsByTagName('a');
+    for (var j = 0; j < linkList.length; j++) {
+      if (linkList[j].innerHTML === "") {
+        linkList[j].setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+});
+</script>
 
 <style type="text/css">
-code{white-space: pre-wrap;}
-span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
-div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-ul.task-list{list-style: none;}
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 
 
 <style type="text/css">
-code {
-white-space: pre;
-}
-.sourceCode {
-overflow: visible;
-}
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -63,54 +78,55 @@ pre > code.sourceCode { white-space: pre-wrap; }
 pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
-{ counter-reset: source-line 0; }
+  { counter-reset: source-line 0; }
 pre.numberSource code > span
-{ position: relative; left: -4em; counter-increment: source-line; }
+  { position: relative; left: -4em; counter-increment: source-line; }
 pre.numberSource code > span > a:first-child::before
-{ content: counter(source-line);
-position: relative; left: -1em; text-align: right; vertical-align: baseline;
-border: none; display: inline-block;
--webkit-touch-callout: none; -webkit-user-select: none;
--khtml-user-select: none; -moz-user-select: none;
--ms-user-select: none; user-select: none;
-padding: 0 4px; width: 4em;
-color: #aaaaaa;
-}
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-{ }
+  {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } 
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
-code span.at { color: #7d9029; } 
-code span.bn { color: #40a070; } 
-code span.bu { color: #008000; } 
-code span.cf { color: #007020; font-weight: bold; } 
-code span.ch { color: #4070a0; } 
-code span.cn { color: #880000; } 
-code span.co { color: #60a0b0; font-style: italic; } 
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
-code span.do { color: #ba2121; font-style: italic; } 
-code span.dt { color: #902000; } 
-code span.dv { color: #40a070; } 
-code span.er { color: #ff0000; font-weight: bold; } 
-code span.ex { } 
-code span.fl { color: #40a070; } 
-code span.fu { color: #06287e; } 
-code span.im { color: #008000; font-weight: bold; } 
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
-code span.kw { color: #007020; font-weight: bold; } 
-code span.op { color: #666666; } 
-code span.ot { color: #007020; } 
-code span.pp { color: #bc7a00; } 
-code span.sc { color: #4070a0; } 
-code span.ss { color: #bb6688; } 
-code span.st { color: #4070a0; } 
-code span.va { color: #19177c; } 
-code span.vs { color: #4070a0; } 
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
 </style>
 <script>
 // apply pandoc div.sourceCode style to pre.sourceCode instead
@@ -341,56 +357,44 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 
-<p>R’s options are a useful tool for managing global settings.
-<code>options</code> aims to make them easy to configure and use, reduce
-boilerplate code and handle more involved options handling so you don’t
-have to.</p>
+<p>R’s options are a useful tool for managing global settings. <code>options</code> aims to make them easy to configure and use, reduce boilerplate code and handle more involved options handling so you don’t have to.</p>
 <div id="defining-options" class="section level1">
 <h1>Defining Options</h1>
-<p>While writing your package, we start by defining which options our
-package might use.</p>
-<p>Define your options using the <code>define_options()</code>
-shorthand. Interlace descriptions and default values to define multiple
-options at once.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>options<span class="sc">::</span><span class="fu">define_options</span>(</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;This is an example of how a package author would document their internally</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="st">  used options. This option could make the package default to executing</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="st">  quietly.&quot;</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">quiet =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Multiple options can be defined, providing default values if a global option</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st">  or environment variable isn&#39;t set.&quot;</span>,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">second_example =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Default values are lazily evaluated, so you are free to use package functions</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="st">  without worrying about build-time evaluation order&quot;</span>,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">lazy_example =</span> <span class="fu">fn_not_defined_until_later</span>()</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p>When you want more control, you can use <code>define_option()</code>
-to declare all aspects of how your option behaves.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>options<span class="sc">::</span><span class="fu">define_option</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">option =</span> <span class="st">&quot;concrete_example&quot;</span>,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">default =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">desc =</span> <span class="fu">paste0</span>(</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Or, if you prefer a more concrete constructor you can define each option &quot;</span>,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;explicitly.&quot;</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">option_name =</span> <span class="st">&quot;mypackage_concrete&quot;</span>, <span class="co"># define custom option names</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">envvar_name =</span> <span class="st">&quot;MYPACKAGE_CONCRETE&quot;</span>, <span class="co"># and custom environment variable names</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">envvar_fn =</span> <span class="fu">envvar_is_true</span>()        <span class="co"># and use helpers to handle envvar parsing</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>While writing your package, we start by defining which options our package might use.</p>
+<p>Define your options using the <code>define_options()</code> shorthand. Interlace descriptions and default values to define multiple options at once.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>options<span class="op">::</span><span class="kw">define_options</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>  <span class="st">&quot;This is an example of how a package author would document their internally</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="st">  used options. This option could make the package default to executing</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="st">  quietly.&quot;</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>  <span class="dt">quiet =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>  <span class="st">&quot;Multiple options can be defined, providing default values if a global option</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a><span class="st">  or environment variable isn&#39;t set.&quot;</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a>  <span class="dt">second_example =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a>  <span class="st">&quot;Default values are lazily evaluated, so you are free to use package functions</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a><span class="st">  without worrying about build-time evaluation order&quot;</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a>  <span class="dt">lazy_example =</span> <span class="kw">fn_not_defined_until_later</span>()</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a>)</span></code></pre></div>
+<p>When you want more control, you can use <code>define_option()</code> to declare all aspects of how your option behaves.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>options<span class="op">::</span><span class="kw">define_option</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>  <span class="dt">option =</span> <span class="st">&quot;concrete_example&quot;</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>  <span class="dt">default =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>  <span class="dt">desc =</span> <span class="kw">paste0</span>(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>    <span class="st">&quot;Or, if you prefer a more concrete constructor you can define each option &quot;</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>    <span class="st">&quot;explicitly.&quot;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>  ),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>  <span class="dt">option_name =</span> <span class="st">&quot;mypackage_concrete&quot;</span>, <span class="co"># define custom option names</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a>  <span class="dt">envvar_name =</span> <span class="st">&quot;MYPACKAGE_CONCRETE&quot;</span>, <span class="co"># and custom environment variable names</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>  <span class="dt">envvar_fn =</span> <span class="kw">envvar_is_true</span>()        <span class="co"># and use helpers to handle envvar parsing</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a>)</span></code></pre></div>
 </div>
 <div id="documentation" class="section level1">
 <h1>Documentation</h1>
-<p>As long as the options have been created as shown above, documenting
-your options is as easy as adding this small roxygen stub within your
-package.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @eval options::as_roxygen_docs()</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cn">NULL</span></span></code></pre></div>
-<p>Which produces a <code>?mypackage::options</code> help page.
-Moreover, any <code>options</code> page will show up in an index when
-using <code>?options</code> to search for documentation, making it
-easier to discover which packages have options for you to use.</p>
+<p>As long as the options have been created as shown above, documenting your options is as easy as adding this small roxygen stub within your package.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="co">#&#39; @eval options::as_roxygen_docs()</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="ot">NULL</span></span></code></pre></div>
+<p>Which produces a <code>?mypackage::options</code> help page. Moreover, any <code>options</code> page will show up in an index when using <code>?options</code> to search for documentation, making it easier to discover which packages have options for you to use.</p>
 <pre><code>mypackage Options
 
 Description:
@@ -415,56 +419,41 @@ Options:
 
           envvar: R_MYPACKAGE_QUIET (raw)
 ...</code></pre>
-<p>When your options are used as default values to parameters, you can
-use the option documentation to populate your function parameter
-docs.</p>
-<p>This is made simple when all of your parameters share the same names
-as your options.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @eval options::as_params()</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @name options_params</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="cn">NULL</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; Count to Three</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @inheritParams option_params</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>count_to_three <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">quiet =</span> <span class="fu">opt</span>(<span class="st">&quot;quiet&quot;</span>)) {</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) <span class="cf">if</span> (<span class="sc">!</span>quiet) <span class="fu">cat</span>(i, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>In situations where you have identically named parameters where you
-<em>don’t</em> want to inherit the option documentation, you can provide
-their names to <code>as_params</code> to use just a subset of options.
-You can also reassign documentation for an option to a parameter of a
-different name.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; Hello World!</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @eval options::as_params(&quot;silent&quot; = &quot;quiet&quot;)</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>hello <span class="ot">&lt;-</span> <span class="cf">function</span>(who, <span class="at">silent =</span> <span class="fu">opt</span>(<span class="st">&quot;quiet&quot;</span>)) {</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">paste0</span>(<span class="st">&quot;Hello, &quot;</span>, who, <span class="st">&quot;!&quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>When your options are used as default values to parameters, you can use the option documentation to populate your function parameter docs.</p>
+<p>This is made simple when all of your parameters share the same names as your options.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="co">#&#39; @eval options::as_params()</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="co">#&#39; @name options_params</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a><span class="co">#&#39;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a><span class="ot">NULL</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a><span class="co">#&#39; Count to Three</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a><span class="co">#&#39;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true"></a><span class="co">#&#39; @inheritParams option_params</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true"></a><span class="co">#&#39;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true"></a>count_to_three &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">quiet =</span> <span class="kw">opt</span>(<span class="st">&quot;quiet&quot;</span>)) {</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) <span class="cf">if</span> (<span class="op">!</span>quiet) <span class="kw">cat</span>(i, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true"></a>}</span></code></pre></div>
+<p>In situations where you have identically named parameters where you <em>don’t</em> want to inherit the option documentation, you can provide their names to <code>as_params</code> to use just a subset of options. You can also reassign documentation for an option to a parameter of a different name.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="co">#&#39; Hello World!</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a><span class="co">#&#39;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a><span class="co">#&#39; @eval options::as_params(&quot;silent&quot; = &quot;quiet&quot;)</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a><span class="co">#&#39;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a>hello &lt;-<span class="st"> </span><span class="cf">function</span>(who, <span class="dt">silent =</span> <span class="kw">opt</span>(<span class="st">&quot;quiet&quot;</span>)) {</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a>  <span class="kw">cat</span>(<span class="kw">paste0</span>(<span class="st">&quot;Hello, &quot;</span>, who, <span class="st">&quot;!&quot;</span>), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <div id="customizing-behaviors" class="section level1">
 <h1>Customizing Behaviors</h1>
-<p>When using <code>define_option</code> you can set the
-<code>option_name</code> and <code>envvar_name</code> that will be used
-directly.</p>
-<p>But it can be tedious and typo-prone to write these out for each and
-every option. Instead, you might consider providing a function that sets
-the default format for your option and environment variable names.</p>
-<p>For this, you can use <code>set_option_name_fn</code> and
-<code>set_envvar_name_fn</code>, which each accept a function as an
-argument. This function accepts two arguments, a package name and
-internal option name, which it uses to produce and return the
-corresponding global option name or environment variable name.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>options<span class="sc">::</span><span class="fu">set_option_name_fn</span>(<span class="cf">function</span>(package, name) {</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tolower</span>(<span class="fu">paste0</span>(package, <span class="st">&quot;.&quot;</span>, name))</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>options<span class="sc">::</span><span class="fu">set_envvar_name_fn</span>(<span class="cf">function</span>(package, name) {</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gsub</span>(<span class="st">&quot;[^A-Z0-9]&quot;</span>, <span class="st">&quot;_&quot;</span>, <span class="fu">toupper</span>(<span class="fu">paste0</span>(package, <span class="st">&quot;_&quot;</span>, name)))</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<p>When using <code>define_option</code> you can set the <code>option_name</code> and <code>envvar_name</code> that will be used directly.</p>
+<p>But it can be tedious and typo-prone to write these out for each and every option. Instead, you might consider providing a function that sets the default format for your option and environment variable names.</p>
+<p>For this, you can use <code>set_option_name_fn</code> and <code>set_envvar_name_fn</code>, which each accept a function as an argument. This function accepts two arguments, a package name and internal option name, which it uses to produce and return the corresponding global option name or environment variable name.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a>options<span class="op">::</span><span class="kw">set_option_name_fn</span>(<span class="cf">function</span>(package, name) {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>  <span class="kw">tolower</span>(<span class="kw">paste0</span>(package, <span class="st">&quot;.&quot;</span>, name))</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a>})</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a>options<span class="op">::</span><span class="kw">set_envvar_name_fn</span>(<span class="cf">function</span>(package, name) {</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true"></a>  <span class="kw">gsub</span>(<span class="st">&quot;[^A-Z0-9]&quot;</span>, <span class="st">&quot;_&quot;</span>, <span class="kw">toupper</span>(<span class="kw">paste0</span>(package, <span class="st">&quot;_&quot;</span>, name)))</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true"></a>})</span></code></pre></div>
 </div>
 
 

@@ -38,6 +38,7 @@
 #' @return An `option_spec` object, which is a simple S3 class wrapping a list
 #'   containing these arguments.
 #'
+#' @importFrom utils packageName
 #' @export
 option_spec <- function(
   name,
@@ -168,12 +169,11 @@ format_field <- function(field, active, value, fmt = options_fmts()) {
 #' @return A formatted character value
 #'
 #' @keywords internal
-format_value <- function(x, ...) {
+format_value <- function(x, ..., fmt = NULL) {
   if (missing(x)) return("")
   UseMethod("format_value")
 }
 
-#' @name format_value
 format_value.default <- function(x, ..., fmt = options_fmts()) {
   if (isS4(x))
     UseMethod("format_value", structure(list(), class = "S4"))
@@ -189,12 +189,12 @@ format_value.default <- function(x, ..., fmt = options_fmts()) {
 }
 
 #' @name format_value
-format_value.S3 <- function(x, .., fmt = options_fmts()) {
+format_value.S3 <- function(x, ..., fmt = options_fmts()) {
   fmt$shorthand(sprintf("<class: %s>", paste0(class(x), collapse = ", ")))
 }
 
 #' @name format_value
-format_value.S4 <- function(x, .., fmt = options_fmts()) {
+format_value.S4 <- function(x, ..., fmt = options_fmts()) {
   fmt$shorthand(sprintf("<S4: %s>", paste0(class(x), collapse = ", ")))
 }
 

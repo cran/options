@@ -27,31 +27,46 @@ document.addEventListener('DOMContentLoaded', function(e) {
   }
 });
 </script>
+<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
+// v0.0.1
+// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeList = document.getElementsByClassName("sourceCode");
+  for (var i = 0; i < codeList.length; i++) {
+    var linkList = codeList[i].getElementsByTagName('a');
+    for (var j = 0; j < linkList.length; j++) {
+      if (linkList[j].innerHTML === "") {
+        linkList[j].setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+});
+</script>
 
 <style type="text/css">
-code{white-space: pre-wrap;}
-span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
-div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-ul.task-list{list-style: none;}
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 
 
 <style type="text/css">
-code {
-white-space: pre;
-}
-.sourceCode {
-overflow: visible;
-}
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -63,54 +78,55 @@ pre > code.sourceCode { white-space: pre-wrap; }
 pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
-{ counter-reset: source-line 0; }
+  { counter-reset: source-line 0; }
 pre.numberSource code > span
-{ position: relative; left: -4em; counter-increment: source-line; }
+  { position: relative; left: -4em; counter-increment: source-line; }
 pre.numberSource code > span > a:first-child::before
-{ content: counter(source-line);
-position: relative; left: -1em; text-align: right; vertical-align: baseline;
-border: none; display: inline-block;
--webkit-touch-callout: none; -webkit-user-select: none;
--khtml-user-select: none; -moz-user-select: none;
--ms-user-select: none; user-select: none;
-padding: 0 4px; width: 4em;
-color: #aaaaaa;
-}
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-{ }
+  {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } 
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
-code span.at { color: #7d9029; } 
-code span.bn { color: #40a070; } 
-code span.bu { color: #008000; } 
-code span.cf { color: #007020; font-weight: bold; } 
-code span.ch { color: #4070a0; } 
-code span.cn { color: #880000; } 
-code span.co { color: #60a0b0; font-style: italic; } 
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
-code span.do { color: #ba2121; font-style: italic; } 
-code span.dt { color: #902000; } 
-code span.dv { color: #40a070; } 
-code span.er { color: #ff0000; font-weight: bold; } 
-code span.ex { } 
-code span.fl { color: #40a070; } 
-code span.fu { color: #06287e; } 
-code span.im { color: #008000; font-weight: bold; } 
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
-code span.kw { color: #007020; font-weight: bold; } 
-code span.op { color: #666666; } 
-code span.ot { color: #007020; } 
-code span.pp { color: #bc7a00; } 
-code span.sc { color: #4070a0; } 
-code span.ss { color: #bb6688; } 
-code span.st { color: #4070a0; } 
-code span.va { color: #19177c; } 
-code span.vs { color: #4070a0; } 
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
 </style>
 <script>
 // apply pandoc div.sourceCode style to pre.sourceCode instead
@@ -341,106 +357,82 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 
-<p>Environment variables can be a tremendously helpful alternative to
-options for behaviors that one might want to handle ubiquitously across
-R sessions, that might be administered, or that might be needed in a
-command-line context.</p>
-<p>They can provide a helpful interface for supporting tasks that might
-be called during continuous integration jobs, on a compute cluster, or
-within a containerized environment. Since use cases can be hard to
-predict, <code>options</code> will consider appropriately named
-environment variables by default.</p>
+<p>Environment variables can be a tremendously helpful alternative to options for behaviors that one might want to handle ubiquitously across R sessions, that might be administered, or that might be needed in a command-line context.</p>
+<p>They can provide a helpful interface for supporting tasks that might be called during continuous integration jobs, on a compute cluster, or within a containerized environment. Since use cases can be hard to predict, <code>options</code> will consider appropriately named environment variables by default.</p>
 <div id="customizing-names" class="section level1">
 <h1>Customizing names</h1>
-<p>Perhaps the default environment names don’t suit you. When defining
-your options, you can always use your own! However, this level of
-customization is only available through the <code>define_option()</code>
-interface.</p>
+<p>Perhaps the default environment names don’t suit you. When defining your options, you can always use your own! However, this level of customization is only available through the <code>define_option()</code> interface.</p>
 <blockquote>
-<p>By default environment variables look like
-<code>R_&lt;PACKAGE&gt;_&lt;OPTION&gt;</code></p>
+<p>By default environment variables look like <code>R_&lt;PACKAGE&gt;_&lt;OPTION&gt;</code></p>
 </blockquote>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(options)</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">define_option</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;volume&quot;</span>,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">default =</span> <span class="st">&quot;shout&quot;</span>,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">desc =</span> <span class="st">&quot;Print output in uppercase (&#39;shout&#39;) or lowercase (&#39;whisper&#39;)&quot;</span>,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">option_name =</span> <span class="st">&quot;volume&quot;</span>,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">envvar_name =</span> <span class="st">&quot;VOL&quot;</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; volume = &quot;shout&quot;</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Print output in uppercase (&#39;shout&#39;) or lowercase (&#39;whisper&#39;)</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   option  : volume</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   envvar  : VOL (evaluated if possible, raw string otherwise)</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  *default : &quot;shout&quot;</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>twist_and <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">what =</span> <span class="fu">opt</span>(<span class="st">&quot;volume&quot;</span>)) {</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  lyric <span class="ot">&lt;-</span> <span class="fu">paste</span>(</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Well, shake it up, baby, now (Shake it up, baby)&quot;</span>,</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Twist and shout (Twist and shout)&quot;</span>,</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="cf">if</span> (what <span class="sc">==</span> <span class="st">&quot;shout&quot;</span>) <span class="fu">toupper</span>(lyric) <span class="cf">else</span> <span class="fu">tolower</span>(lyric), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">twist_and</span>()  <span class="co"># by default, &quot;shout&quot;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; WELL, SHAKE IT UP, BABY, NOW (SHAKE IT UP, BABY)</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TWIST AND SHOUT (TWIST AND SHOUT)</span></span></code></pre></div>
-<p>We can now alter our behavior using the environment variable,
-<code>VOL</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">VOL =</span> <span class="st">&quot;whisper&quot;</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">twist_and</span>()  <span class="co"># picks up our environment variable, &quot;whisper&quot;</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; well, shake it up, baby, now (shake it up, baby)</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; twist and shout (twist and shout)</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">library</span>(options)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">define_option</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>  <span class="st">&quot;volume&quot;</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>  <span class="dt">default =</span> <span class="st">&quot;shout&quot;</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>  <span class="dt">desc =</span> <span class="st">&quot;Print output in uppercase (&#39;shout&#39;) or lowercase (&#39;whisper&#39;)&quot;</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>  <span class="dt">option_name =</span> <span class="st">&quot;volume&quot;</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>  <span class="dt">envvar_name =</span> <span class="st">&quot;VOL&quot;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a><span class="co">#&gt; </span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a><span class="co">#&gt; volume = &quot;shout&quot;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a><span class="co">#&gt; </span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a><span class="co">#&gt;   Print output in uppercase (&#39;shout&#39;) or lowercase (&#39;whisper&#39;)</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a><span class="co">#&gt; </span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a><span class="co">#&gt;   option  : volume</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a><span class="co">#&gt;   envvar  : VOL (evaluated if possible, raw string otherwise)</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true"></a><span class="co">#&gt;  *default : &quot;shout&quot;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true"></a>twist_and &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">what =</span> <span class="kw">opt</span>(<span class="st">&quot;volume&quot;</span>)) {</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true"></a>  lyric &lt;-<span class="st"> </span><span class="kw">paste</span>(</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true"></a>    <span class="st">&quot;Well, shake it up, baby, now (Shake it up, baby)&quot;</span>,</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true"></a>    <span class="st">&quot;Twist and shout (Twist and shout)&quot;</span>,</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true"></a>    <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true"></a>  )</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true"></a>  <span class="kw">cat</span>(<span class="cf">if</span> (what <span class="op">==</span><span class="st"> &quot;shout&quot;</span>) <span class="kw">toupper</span>(lyric) <span class="cf">else</span> <span class="kw">tolower</span>(lyric), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="kw">twist_and</span>()  <span class="co"># by default, &quot;shout&quot;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="co">#&gt; WELL, SHAKE IT UP, BABY, NOW (SHAKE IT UP, BABY)</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="co">#&gt; TWIST AND SHOUT (TWIST AND SHOUT)</span></span></code></pre></div>
+<p>We can now alter our behavior using the environment variable, <code>VOL</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="kw">Sys.setenv</span>(<span class="dt">VOL =</span> <span class="st">&quot;whisper&quot;</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="kw">twist_and</span>()  <span class="co"># picks up our environment variable, &quot;whisper&quot;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a><span class="co">#&gt; well, shake it up, baby, now (shake it up, baby)</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a><span class="co">#&gt; twist and shout (twist and shout)</span></span></code></pre></div>
 <p>That’s better!</p>
 </div>
 <div id="setting-naming-rules" class="section level1">
 <h1>Setting Naming Rules</h1>
-<p>Although individually mapping options to environment variables is
-handy for one-off options, it can be tedious to do throughout your
-package, especially if you want all your variables to follow some
-consistent naming scheme.</p>
-<p>For this we can provide a function which is used to name all future
-options’ environment variables.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set_envvar_name_fn</span>(<span class="cf">function</span>(package, name) {</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gsub</span>(<span class="st">&quot;[^A-Z0-9]&quot;</span>, <span class="st">&quot;_&quot;</span>, <span class="fu">toupper</span>(<span class="fu">paste0</span>(package, <span class="st">&quot;_&quot;</span>, name)))</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
-<p>Now any future option environment variables will use this convention
-when they are defined. Existing options will be unaffected until they
-are redefined, so it’s often best to make sure this code runs before you
-start defining options.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">define_options</span>(</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Print output in uppercase (&#39;shout&#39;) or lowercase (&#39;whisper&#39;)&quot;</span>,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">volume =</span> <span class="st">&quot;shout&quot;</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; volume = &quot;shout&quot;</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Print output in uppercase (&#39;shout&#39;) or lowercase (&#39;whisper&#39;)</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   option  : globalenv.volume</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   envvar  : GLOBALENV_VOLUME (evaluated if possible, raw string otherwise)</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  *default : &quot;shout&quot;</span></span></code></pre></div>
-<p>You’ll notice that our redefined option now uses our custom naming
-scheme for its environment variable.</p>
-<p>You can always write your own function, or choose from some of the
-pre-built ones in <code>?naming_formats</code>.</p>
+<p>Although individually mapping options to environment variables is handy for one-off options, it can be tedious to do throughout your package, especially if you want all your variables to follow some consistent naming scheme.</p>
+<p>For this we can provide a function which is used to name all future options’ environment variables.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="kw">set_envvar_name_fn</span>(<span class="cf">function</span>(package, name) {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>  <span class="kw">gsub</span>(<span class="st">&quot;[^A-Z0-9]&quot;</span>, <span class="st">&quot;_&quot;</span>, <span class="kw">toupper</span>(<span class="kw">paste0</span>(package, <span class="st">&quot;_&quot;</span>, name)))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a>})</span></code></pre></div>
+<p>Now any future option environment variables will use this convention when they are defined. Existing options will be unaffected until they are redefined, so it’s often best to make sure this code runs before you start defining options.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="kw">define_options</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>  <span class="st">&quot;Print output in uppercase (&#39;shout&#39;) or lowercase (&#39;whisper&#39;)&quot;</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a>  <span class="dt">volume =</span> <span class="st">&quot;shout&quot;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a><span class="co">#&gt; </span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a><span class="co">#&gt; volume = &quot;shout&quot;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true"></a><span class="co">#&gt; </span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true"></a><span class="co">#&gt;   Print output in uppercase (&#39;shout&#39;) or lowercase (&#39;whisper&#39;)</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true"></a><span class="co">#&gt; </span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true"></a><span class="co">#&gt;   option  : globalenv.volume</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true"></a><span class="co">#&gt;   envvar  : GLOBALENV_VOLUME (evaluated if possible, raw string otherwise)</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true"></a><span class="co">#&gt;  *default : &quot;shout&quot;</span></span></code></pre></div>
+<p>You’ll notice that our redefined option now uses our custom naming scheme for its environment variable.</p>
+<p>You can always write your own function, or choose from some of the pre-built ones in <code>?naming_formats</code>.</p>
 </div>
 <div id="parsing-values" class="section level1">
 <h1>Parsing Values</h1>
-<p>So far we’ve just been using the environment variable’s value as-is.
-Environment variable values, by default, will try to be parsed into R
-objects. If that fails, they’ll deliver the raw string value.</p>
-<p>This can be a nice default behavior, handling many simple cases as
-expected</p>
+<p>So far we’ve just been using the environment variable’s value as-is. Environment variable values, by default, will try to be parsed into R objects. If that fails, they’ll deliver the raw string value.</p>
+<p>This can be a nice default behavior, handling many simple cases as expected</p>
 <table>
 <colgroup>
-<col width="49%" />
-<col width="50%" />
+<col width="49%"></col>
+<col width="50%"></col>
 </colgroup>
 <thead>
 <tr class="header">
@@ -484,116 +476,98 @@ expected</p>
 </tr>
 </tbody>
 </table>
-<p>But you’ll notice that a typo in our last example completely changed
-the type of data that is read in. Depending on the way that you intend
-to use this variable, perhaps this default is more error-prone than
-necessary.</p>
-<p>To help with this, there is a whole family of functions that allow
-you to customize the way that environment variables are internalized as
-option values (<code>?envvar_fns</code>). Generally, it’s best to keep
-these specific to the data type of the option that you intend to use -
-for example, using <code>envvar_is_true</code> to always coerce the
-value to a logical scalar.</p>
-<p>Just like before, these are used to specify your option’s
-behaviors:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">define_option</span>(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;volume&quot;</span>,</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">default =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">desc =</span> <span class="st">&quot;Print output in uppercase (TRUE) or lowercase (FALSE)&quot;</span>,</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">envvar_fn =</span> <span class="fu">envvar_is_true</span>()</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; volume = TRUE</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Print output in uppercase (TRUE) or lowercase (FALSE)</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   option  : globalenv.volume</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   envvar  : GLOBALENV_VOLUME (TRUE if one of &#39;TRUE&#39;, &#39;1&#39;, FALSE otherwise)</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  *default : TRUE</span></span></code></pre></div>
+<p>But you’ll notice that a typo in our last example completely changed the type of data that is read in. Depending on the way that you intend to use this variable, perhaps this default is more error-prone than necessary.</p>
+<p>To help with this, there is a whole family of functions that allow you to customize the way that environment variables are internalized as option values (<code>?envvar_fns</code>). Generally, it’s best to keep these specific to the data type of the option that you intend to use - for example, using <code>envvar_is_true</code> to always coerce the value to a logical scalar.</p>
+<p>Just like before, these are used to specify your option’s behaviors:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="kw">define_option</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a>  <span class="st">&quot;volume&quot;</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a>  <span class="dt">default =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a>  <span class="dt">desc =</span> <span class="st">&quot;Print output in uppercase (TRUE) or lowercase (FALSE)&quot;</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true"></a>  <span class="dt">envvar_fn =</span> <span class="kw">envvar_is_true</span>()</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true"></a>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true"></a><span class="co">#&gt; </span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true"></a><span class="co">#&gt; volume = TRUE</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true"></a><span class="co">#&gt; </span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true"></a><span class="co">#&gt;   Print output in uppercase (TRUE) or lowercase (FALSE)</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true"></a><span class="co">#&gt; </span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true"></a><span class="co">#&gt;   option  : globalenv.volume</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true"></a><span class="co">#&gt;   envvar  : GLOBALENV_VOLUME (TRUE if one of &#39;TRUE&#39;, &#39;1&#39;, FALSE otherwise)</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true"></a><span class="co">#&gt;  *default : TRUE</span></span></code></pre></div>
 <p>Of course you can define this function however you like.</p>
 </div>
 <div id="example" class="section level1">
 <h1>Example</h1>
-<p>Let’s put it all together. We’ll customize our environment variable
-name, and provide a custom <code>envvar_fn</code> which handles how we
-interpret the raw environment variable value.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">define_option</span>(</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;volume&quot;</span>,</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">default =</span> <span class="dv">1</span>,</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">desc =</span> <span class="fu">paste0</span>(</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Print output in uppercase (shout) or lowercase (whisper), or any &quot;</span>,</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;number from 1-10 for random uppercasing&quot;</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">envvar_name =</span> <span class="st">&quot;VOL&quot;</span>,</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">envvar_fn =</span> <span class="cf">function</span>(raw, ...) {</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    choice_of_nums <span class="ot">&lt;-</span> <span class="fu">envvar_choice_of</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>)</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">switch</span>(raw, <span class="at">shout =</span> <span class="dv">10</span>, <span class="at">whisper =</span> <span class="dv">1</span>, <span class="fu">choice_of_nums</span>(raw))</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; volume = 1</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Print output in uppercase (shout) or lowercase (whisper), or any</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   number from 1-10 for random uppercasing</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   option  : globalenv.volume</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   envvar  : VOL</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  *default : 1</span></span></code></pre></div>
+<p>Let’s put it all together. We’ll customize our environment variable name, and provide a custom <code>envvar_fn</code> which handles how we interpret the raw environment variable value.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="kw">define_option</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a>  <span class="st">&quot;volume&quot;</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a>  <span class="dt">default =</span> <span class="dv">1</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a>  <span class="dt">desc =</span> <span class="kw">paste0</span>(</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true"></a>    <span class="st">&quot;Print output in uppercase (shout) or lowercase (whisper), or any &quot;</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true"></a>    <span class="st">&quot;number from 1-10 for random uppercasing&quot;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true"></a>  ),</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true"></a>  <span class="dt">envvar_name =</span> <span class="st">&quot;VOL&quot;</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true"></a>  <span class="dt">envvar_fn =</span> <span class="cf">function</span>(raw, ...) {</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true"></a>    choice_of_nums &lt;-<span class="st"> </span><span class="kw">envvar_choice_of</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">11</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true"></a>    <span class="cf">switch</span>(raw, <span class="dt">shout =</span> <span class="dv">10</span>, <span class="dt">whisper =</span> <span class="dv">1</span>, <span class="kw">choice_of_nums</span>(raw))</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true"></a>  }</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true"></a>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true"></a><span class="co">#&gt; </span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true"></a><span class="co">#&gt; volume = 1</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true"></a><span class="co">#&gt; </span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true"></a><span class="co">#&gt;   Print output in uppercase (shout) or lowercase (whisper), or any</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true"></a><span class="co">#&gt;   number from 1-10 for random uppercasing</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true"></a><span class="co">#&gt; </span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true"></a><span class="co">#&gt;   option  : globalenv.volume</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true"></a><span class="co">#&gt;   envvar  : VOL</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true"></a><span class="co">#&gt;  *default : 1</span></span></code></pre></div>
 <blockquote>
-<p>Note that the <code>?envvar_fns</code> family of functions, like
-<code>envvar_choice_of()</code> return <em>functions</em>. Although this
-is a very powerful mechanism of customizing behaviors, it can look odd
-at first glance.</p>
-<p>We first generate our function by giving it which values to choose
-from (<code>envvar_choice_of(1:11)</code>), then use that function when
-we have our raw value (<code>choice_of_nums(raw)</code>).</p>
+<p>Note that the <code>?envvar_fns</code> family of functions, like <code>envvar_choice_of()</code> return <em>functions</em>. Although this is a very powerful mechanism of customizing behaviors, it can look odd at first glance.</p>
+<p>We first generate our function by giving it which values to choose from (<code>envvar_choice_of(1:11)</code>), then use that function when we have our raw value (<code>choice_of_nums(raw)</code>).</p>
 </blockquote>
-<p>Now we need to update our <code>twist_and</code> function to work
-with our newly consistent numeric volumes.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>twist_and_shout <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">vol =</span> <span class="fu">opt</span>(<span class="st">&quot;volume&quot;</span>)) {</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  lyric <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Well, shake it up, baby, now (Shake it up, baby)&quot;</span>,</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Twist and shout (Twist and shout)&quot;</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># handle case where volume knob is broken</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.null</span>(vol)) <span class="fu">stop</span>(<span class="st">&quot;someone turned off the stereo&quot;</span>)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># randomly uppercase characters to match volume</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  lyric <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(<span class="fu">tolower</span>(lyric), <span class="st">&quot;&quot;</span>)</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  lyric <span class="ot">&lt;-</span> <span class="fu">lapply</span>(lyric, <span class="cf">function</span>(line) {</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    char_sample <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="fu">nchar</span>(line)) <span class="sc">&lt;</span> (vol <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">/</span> <span class="dv">9</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    line[char_sample] <span class="ot">&lt;-</span> <span class="fu">toupper</span>(line[char_sample])</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste0</span>(line, <span class="at">collapse =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># in case someone turns it up to 11</span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (vol <span class="sc">==</span> <span class="dv">11</span>) lyric <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;(</span><span class="sc">\\</span><span class="st">s*</span><span class="sc">\\</span><span class="st">(|</span><span class="sc">\\</span><span class="st">))&quot;</span>, <span class="st">&quot;!!!</span><span class="sc">\\</span><span class="st">1&quot;</span>, lyric)</span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">paste</span>(lyric, <span class="at">collapse =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Now we need to update our <code>twist_and</code> function to work with our newly consistent numeric volumes.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a>twist_and_shout &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">vol =</span> <span class="kw">opt</span>(<span class="st">&quot;volume&quot;</span>)) {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a>  lyric &lt;-<span class="st"> </span><span class="kw">c</span>(</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true"></a>    <span class="st">&quot;Well, shake it up, baby, now (Shake it up, baby)&quot;</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true"></a>    <span class="st">&quot;Twist and shout (Twist and shout)&quot;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true"></a>  )</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true"></a>  <span class="co"># handle case where volume knob is broken</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true"></a>  <span class="cf">if</span> (<span class="kw">is.null</span>(vol)) <span class="kw">stop</span>(<span class="st">&quot;someone turned off the stereo&quot;</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true"></a>  <span class="co"># randomly uppercase characters to match volume</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true"></a>  lyric &lt;-<span class="st"> </span><span class="kw">strsplit</span>(<span class="kw">tolower</span>(lyric), <span class="st">&quot;&quot;</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true"></a>  lyric &lt;-<span class="st"> </span><span class="kw">lapply</span>(lyric, <span class="cf">function</span>(line) {</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true"></a>    char_sample &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="kw">nchar</span>(line)) <span class="op">&lt;</span><span class="st"> </span>(vol <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">/</span><span class="st"> </span><span class="dv">9</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true"></a>    line[char_sample] &lt;-<span class="st"> </span><span class="kw">toupper</span>(line[char_sample])</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true"></a>    <span class="kw">paste0</span>(line, <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true"></a>  })</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true"></a>  <span class="co"># in case someone turns it up to 11</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true"></a>  <span class="cf">if</span> (vol <span class="op">==</span><span class="st"> </span><span class="dv">11</span>) lyric &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot;(</span><span class="ch">\\</span><span class="st">s*</span><span class="ch">\\</span><span class="st">(|</span><span class="ch">\\</span><span class="st">))&quot;</span>, <span class="st">&quot;!!!</span><span class="ch">\\</span><span class="st">1&quot;</span>, lyric)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true"></a>  <span class="kw">cat</span>(<span class="kw">paste</span>(lyric, <span class="dt">collapse =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true"></a>}</span></code></pre></div>
 <p>Let’s try it out!</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">VOL =</span> <span class="st">&quot;whisper&quot;</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">twist_and_shout</span>()</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; well, shake it up, baby, now (shake it up, baby)</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; twist and shout (twist and shout)</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">VOL =</span> <span class="dv">5</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">twist_and_shout</span>()</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; well, sHaKE IT Up, BabY, Now (shAke It uP, bABY)</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tWisT AND sHoUt (twISt aNd shouT)</span></span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">VOL =</span> <span class="st">&quot;shout&quot;</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">twist_and_shout</span>()</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; WELL, SHAKE IT UP, BABY, NOW (SHAKE IT UP, BABY)</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TWIST AND SHOUT (TWIST AND SHOUT)</span></span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">VOL =</span> <span class="dv">11</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">twist_and_shout</span>()</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; WELL, SHAKE IT UP, BABY, NOW!!! (SHAKE IT UP, BABY!!!)</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TWIST AND SHOUT!!! (TWIST AND SHOUT!!!)</span></span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">VOL =</span> <span class="st">&quot;off&quot;</span>)  <span class="co"># parsed as NULL</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">twist_and_shout</span>()</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in twist_and_shout(): someone turned off the stereo</span></span></code></pre></div>
-<p>Looks pretty good! We handle just the inputs we want, without having
-to worry about unexpected data slipping into our R code.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a><span class="kw">Sys.setenv</span>(<span class="dt">VOL =</span> <span class="st">&quot;whisper&quot;</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true"></a><span class="kw">twist_and_shout</span>()</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true"></a><span class="co">#&gt; well, shake it up, baby, now (shake it up, baby)</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true"></a><span class="co">#&gt; twist and shout (twist and shout)</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="kw">Sys.setenv</span>(<span class="dt">VOL =</span> <span class="dv">5</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a><span class="kw">twist_and_shout</span>()</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true"></a><span class="co">#&gt; Well, ShAKE it UP, BaBy, noW (sHAKE iT Up, baBY)</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true"></a><span class="co">#&gt; twIST aNd ShOut (TwisT aND shOut)</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a><span class="kw">Sys.setenv</span>(<span class="dt">VOL =</span> <span class="st">&quot;shout&quot;</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true"></a><span class="kw">twist_and_shout</span>()</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true"></a><span class="co">#&gt; WELL, SHAKE IT UP, BABY, NOW (SHAKE IT UP, BABY)</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true"></a><span class="co">#&gt; TWIST AND SHOUT (TWIST AND SHOUT)</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a><span class="kw">Sys.setenv</span>(<span class="dt">VOL =</span> <span class="dv">11</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true"></a><span class="kw">twist_and_shout</span>()</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true"></a><span class="co">#&gt; WELL, SHAKE IT UP, BABY, NOW!!! (SHAKE IT UP, BABY!!!)</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true"></a><span class="co">#&gt; TWIST AND SHOUT!!! (TWIST AND SHOUT!!!)</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a><span class="kw">Sys.setenv</span>(<span class="dt">VOL =</span> <span class="st">&quot;off&quot;</span>)  <span class="co"># parsed as NULL</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true"></a><span class="kw">twist_and_shout</span>()</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true"></a><span class="co">#&gt; Error in twist_and_shout(): someone turned off the stereo</span></span></code></pre></div>
+<p>Looks pretty good! We handle just the inputs we want, without having to worry about unexpected data slipping into our R code.</p>
 </div>
 
 

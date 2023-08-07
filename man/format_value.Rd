@@ -2,7 +2,6 @@
 % Please edit documentation in R/options_spec.R
 \name{format_value}
 \alias{format_value}
-\alias{format_value.default}
 \alias{format_value.S3}
 \alias{format_value.S4}
 \alias{format_value.function}
@@ -14,13 +13,11 @@
 \alias{format_value.symbol}
 \title{Format value shorthands for command line display}
 \usage{
-format_value(x, ...)
+format_value(x, ..., fmt = NULL)
 
-format_value.default(x, ..., fmt = options_fmts())
+\method{format_value}{S3}(x, ..., fmt = options_fmts())
 
-\method{format_value}{S3}(x, .., fmt = options_fmts())
-
-\method{format_value}{S4}(x, .., fmt = options_fmts())
+\method{format_value}{S4}(x, ..., fmt = options_fmts())
 
 \method{format_value}{`function`}(x, ..., fmt = options_fmts())
 
