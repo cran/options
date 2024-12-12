@@ -30,9 +30,11 @@ twist_and <- function(what = opt("volume")) {
 twist_and()  # by default, "shout"
 
 ## ----custom_envvar_val, error = TRUE------------------------------------------
+try({
 Sys.setenv(VOL = "whisper")
 
 twist_and()  # picks up our environment variable, "whisper"
+})
 
 ## ----envvar_name_convention---------------------------------------------------
 set_envvar_name_fn(function(package, name) {
@@ -118,6 +120,8 @@ Sys.setenv(VOL = 11)
 twist_and_shout()
 
 ## ----error = TRUE-------------------------------------------------------------
+try({
 Sys.setenv(VOL = "off")  # parsed as NULL
 twist_and_shout()
+})
 

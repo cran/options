@@ -1,3 +1,13 @@
+# options 0.3.0
+
+* Introduces `opts_list()`, a utility for producing a list of option values with
+  appropriate global option names that can be used more readily with 
+  `options()` and `withr::with_options()`. (@dgkf #19)
+
+## Bug Fixes
+
+* Fixed `envvar_str_split()` not making us of `delim` parameter. (@dgkf #23)
+
 # options 0.2.0
 
 * Fixes `opts()`, which would previously return default values after being
