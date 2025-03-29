@@ -1,6 +1,6 @@
 Package: options
 Title: Simple, Consistent Package Options
-Version: 0.3.0
+Version: 0.3.1
 Authors@R: 
     person(
       "Doug",
@@ -24,8 +24,8 @@ Encoding: UTF-8
 RoxygenNote: 7.3.2
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2024-12-12 18:22:54 UTC; root
+Packaged: 2025-03-29 20:18:02 UTC; root
 Author: Doug Kelkhoff [aut, cre]
 Maintainer: Doug Kelkhoff <doug.kelkhoff@gmail.com>
 Repository: CRAN
-Date/Publication: 2024-12-12 19:00:01 UTC
+Date/Publication: 2025-03-29 20:40:02 UTC
